@@ -32,14 +32,14 @@ EXERCISE_IMAGES = {
 
 # Lista ćwiczeń z kolorami i opisami
 EXERCISES = {
-    "Wyciskanie na ławeczce poziomej": {"color": "#FF6B6B", "description": "Klatka piersiowa"},
+    "Wyciskanie na ławeczce poziomej": {"color": "#FF6B6B", "description": "Mięśnie klatki piersiowej"},
     "Brzuszki na maszynie": {"color": "#4ECDC4", "description": "Mięśnie brzucha"},
     "Wypychanie nóg (Leg Press)": {"color": "#45B7D1", "description": "Mięśnie nóg"},
     "Biceps - uginanie ramion": {"color": "#96CEB4", "description": "Biceps"},
     "Barki - podciąganie sztangi": {"color": "#FFEAA7", "description": "Barki"},
     "Triceps - wyciskanie francuskie": {"color": "#DDA0DD", "description": "Triceps"},
-    "Przenoszenie hantla za głowę w leżeniu": {"color": "#FFB347", "description": "Plecy"},
-    "Wyciskanie na suwnicy Smitha": {"color": "#87CEEB", "description": "Plecy - szerokość"}
+    "Przenoszenie hantla za głowę w leżeniu": {"color": "#FFB347", "description": "Mięśnie klatki piersiowej"},
+    "Wyciskanie na suwnicy Smitha": {"color": "#87CEEB", "description": "Mięśnie klatki piersiowej"}
 }
 
 def image_to_base64(image):
