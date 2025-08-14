@@ -144,11 +144,10 @@ def exercise_page(exercise_name):
     st.markdown("---")
     if st.button("⬅️ Powrót do ćwiczeń", use_container_width=True):
         st.session_state.selected_exercise = None
-        # czyścimy parametry w URL (powrót na główną)
-        st.experimental_set_query_params()
+        st.query_params = {}
         st.rerun()
 
-# === Strona główna z klikalnymi obrazkami (anchor <a> wokół div -> cały kafelek klikalny) ===
+# === Strona główna z klikalnymi obrazkami ===
 def main_page():
     st.title("💪 Tracker Siłowni")
     st.markdown("### Wybierz ćwiczenie:")
@@ -182,16 +181,11 @@ def main_page():
                         """, unsafe_allow_html=True)
                 except Exception as e:
                     st.error(f"Błąd wczytywania obrazka: {e}")
-                    # fallback: zwykły przycisk
-                    if st.button(f"📌 Wybierz: {exercise_name}", key=f"btn_{idx}"):
-                        st.session_state.selected_exercise = exercise_name
-                        st.experimental_set_query_params(exercise=exercise_name)
-                        st.rerun()
             else:
-                # brak obrazka - pokazujemy przycisk
+                # fallback: brak obrazka
                 if st.button(f"📌 Wybierz: {exercise_name}", key=f"btn_{idx}"):
                     st.session_state.selected_exercise = exercise_name
-                    st.experimental_set_query_params(exercise=exercise_name)
+                    st.query_params = {"exercise": exercise_name}
                     st.rerun()
 
             # opis pod kafelkiem
@@ -213,13 +207,12 @@ if 'selected_exercise' not in st.session_state:
 
 params = st.query_params
 if "exercise" in params:
-    # st.query_params może zwracać listę lub string, bądźmy defensywni
     raw = params.get("exercise")
     exercise_name_from_url = raw[0] if isinstance(raw, (list, tuple)) else raw
     if exercise_name_from_url in EXERCISES:
         st.session_state.selected_exercise = exercise_name_from_url
 
-# === Główna logika aplikacji ===
+# === Główna logika ===
 if st.session_state.selected_exercise is not None:
     exercise_page(st.session_state.selected_exercise)
 else:
