@@ -184,8 +184,8 @@ def main_page():
                 text-align: center;
             ">
                 <p style="color: #666; margin: 0;">
-                    {exercise_data['description']}
-                </p>
+
+
             </div>
             """, unsafe_allow_html=True)
 
