@@ -163,7 +163,7 @@ def create_progress_chart(exercise_name):
             st.metric("📊 Postęp", "Początek!")
 
 def exercise_page(exercise_name):
-    """Strona konkretnego ćwiczenia"""
+    """Strona konkretnego ćwiczenia (bez obrazka)"""
     st.markdown(f"""
     <div style="text-align: center; margin-bottom: 30px;">
         <h1 style="color: {EXERCISES[exercise_name]['color']};">
@@ -172,17 +172,6 @@ def exercise_page(exercise_name):
         <p style="font-size: 18px; color: #666;">{EXERCISES[exercise_name]['description']}</p>
     </div>
     """, unsafe_allow_html=True)
-
-    # Wyświetlanie obrazka PNG
-    image_file = EXERCISE_IMAGES.get(exercise_name)
-    if image_file and os.path.exists(image_file):
-        try:
-            image = Image.open(image_file)
-            st.image(image, width=250, use_container_width=False)
-        except Exception as e:
-            st.error(f"Błąd podczas wczytywania obrazka: {e}")
-    else:
-        st.warning(f"Obrazek {image_file} nie znaleziony!")
 
     # Formularz dodawania
     with st.form(f"workout_form_{exercise_name}", clear_on_submit=True):
@@ -233,54 +222,62 @@ def exercise_page(exercise_name):
         st.rerun()
 
 def main_page():
-    """Strona główna z kafelkami ćwiczeń"""
+    """Strona główna z klikalnymi kafelkami"""
     st.title("💪 Tracker Siłowni")
     st.markdown("### Wybierz ćwiczenie:")
 
     # Wyświetlanie kafelków w siatce 2x4
-    for i in range(0, len(EXERCISES), 2):
-        cols = st.columns(2)
-        exercises_list = list(EXERCISES.items())
+    cols = st.columns(2)
+    for idx, (exercise_name, exercise_data) in enumerate(EXERCISES.items()):
+        with cols[idx % 2]:
+            # Kafelek jako klikalny element
+            image_file = EXERCISE_IMAGES.get(exercise_name)
 
-        for col_idx in range(2):
-            exercise_idx = i + col_idx
-            if exercise_idx < len(exercises_list):
-                exercise_name, exercise_data = exercises_list[exercise_idx]
+            if image_file and os.path.exists(image_file):
+                # Przycisk z obrazkiem jako tło
+                st.markdown(
+                    f"""
+                    <style>
+                        div[data-testid="stButton_{idx}"] > button {{
+                            background: url('{image_file}') no-repeat center center;
+                            background-size: contain;
+                            height: 150px;
+                            width: 100%;
+                            border: 2px solid {exercise_data['color']};
+                            border-radius: 10px;
+                        }}
+                        div[data-testid="stButton_{idx}"] > button:hover {{
+                            opacity: 0.8;
+                            border: 2px solid {exercise_data['color']};
+                        }}
+                    </style>
+                    """,
+                    unsafe_allow_html=True
+                )
 
-                with cols[col_idx]:
-                    # Wyświetlanie obrazka
-                    image_file = EXERCISE_IMAGES.get(exercise_name)
-                    if image_file and os.path.exists(image_file):
-                        try:
-                            image = Image.open(image_file)
-                            st.image(image, width=250, use_container_width=False)
-                        except Exception as e:
-                            st.error(f"Błąd podczas wczytywania obrazka: {e}")
+            if st.button(
+                label=exercise_name,
+                key=f"btn_{idx}",
+                use_container_width=True
+            ):
+                st.session_state.selected_exercise = exercise_name
+                st.rerun()
 
-                    # Przycisk do wyboru ćwiczenia
-                    if st.button(
-                        exercise_name,
-                        key=f"btn_{exercise_idx}",
-                        use_container_width=True
-                    ):
-                        st.session_state.selected_exercise = exercise_name
-                        st.rerun()
-
-                    # Opis ćwiczenia
-                    st.markdown(f"""
-                    <div style="
-                        background: linear-gradient(135deg, {exercise_data['color']}15, {exercise_data['color']}25);
-                        border: 2px solid {exercise_data['color']};
-                        border-radius: 10px;
-                        padding: 15px;
-                        margin: 10px 0;
-                        text-align: center;
-                    ">
-                        <p style="color: #666; margin: 5px 0; font-size: 14px;">
-                            {exercise_data['description']}
-                        </p>
-                    </div>
-                    """, unsafe_allow_html=True)
+            # Opis ćwiczenia
+            st.markdown(f"""
+            <div style="
+                background: linear-gradient(135deg, {exercise_data['color']}15, {exercise_data['color']}25);
+                border: 2px solid {exercise_data['color']};
+                border-radius: 10px;
+                padding: 15px;
+                margin: 10px 0;
+                text-align: center;
+            ">
+                <p style="color: #666; margin: 5px 0; font-size: 14px;">
+                    {exercise_data['description']}
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
 
 # Inicjalizacja session state
 if 'selected_exercise' not in st.session_state:
