@@ -1,0 +1,46 @@
+{
+  "Wyciskanie na ławeczce poziomej": [
+    {
+      "date": "2025-08-12",
+      "weight": 40.0,
+      "reps": 10,
+      "sets": 3
+    },
+    {
+      "date": "2025-08-13",
+      "weight": 45.0,
+      "reps": 10,
+      "sets": 3
+    },
+    {
+      "date": "2025-08-14",
+      "weight": 50.0,
+      "reps": 10,
+      "sets": 3
+    },
+    {
+      "date": "2025-08-15",
+      "weight": 55.0
+    }
+  ],
+  "Wypychanie nóg (Leg Press)": [
+    {
+      "date": "2025-08-12",
+      "weight": 50.0,
+      "reps": 10,
+      "sets": 3
+    },
+    {
+      "date": "2025-08-13",
+      "weight": 60.0,
+      "reps": 10,
+      "sets": 3
+    },
+    {
+      "date": "2025-08-14",
+      "weight": 100.0,
+      "reps": 10,
+      "sets": 3
+    }
+  ]
+}
