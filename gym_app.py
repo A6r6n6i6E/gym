@@ -24,10 +24,10 @@ EXERCISE_IMAGES = {
     "Brzuszki na maszynie": "brzuszki.png",
     "Wypychanie nóg (Leg Press)": "legpress.png",
     "Biceps - uginanie ramion": "biceps.png",
-    "Wyciskanie nad głową": "barki.png",
-    "Triceps - prostowanie": "triceps.png",
-    "Wiosłowanie": "wioslowanie.png",
-    "Podciąganie": "podciaganie.png"
+    "Barki - podciąganie sztangi": "barki.png",
+    "Triceps - wyciskanie francuskie": "triceps.png",
+    "Przenoszenie hantla za głowę w leżeniu": "wioslowanie.png",
+    "Wyciskanie na suwnicy Smitha": "podciaganie.png"
 }
 
 # Lista ćwiczeń z kolorami i opisami
@@ -36,10 +36,10 @@ EXERCISES = {
     "Brzuszki na maszynie": {"color": "#4ECDC4", "description": "Mięśnie brzucha"},
     "Wypychanie nóg (Leg Press)": {"color": "#45B7D1", "description": "Mięśnie nóg"},
     "Biceps - uginanie ramion": {"color": "#96CEB4", "description": "Biceps"},
-    "Wyciskanie nad głową": {"color": "#FFEAA7", "description": "Barki"},
-    "Triceps - prostowanie": {"color": "#DDA0DD", "description": "Triceps"},
-    "Wiosłowanie": {"color": "#FFB347", "description": "Plecy"},
-    "Podciąganie": {"color": "#87CEEB", "description": "Plecy - szerokość"}
+    "Barki - podciąganie sztangi": {"color": "#FFEAA7", "description": "Barki"},
+    "Triceps - wyciskanie francuskie": {"color": "#DDA0DD", "description": "Triceps"},
+    "Przenoszenie hantla za głowę w leżeniu": {"color": "#FFB347", "description": "Plecy"},
+    "Wyciskanie na suwnicy Smitha": {"color": "#87CEEB", "description": "Plecy - szerokość"}
 }
 
 def image_to_base64(image):
